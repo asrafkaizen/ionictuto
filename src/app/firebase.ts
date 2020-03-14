@@ -1,3 +1,5 @@
+//todo might be useless file
+
 const config = {
         apiKey: "AIzaSyAweoOOhx6Qi2rzzFowTltuy8t6OH9iMmk",
         authDomain: "asrafkaizen-87188.firebaseapp.com",
