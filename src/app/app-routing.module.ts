@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'addworker', pathMatch: 'full' }, //testing addworker
+  { path: '', redirectTo: 'register', pathMatch: 'full' }, //testing addworker
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
@@ -11,10 +11,7 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
-  {
-    path: 'addworker',
-    loadChildren: () => import('./addworker/addworker.module').then( m => m.AddworkerPageModule)
-  },
+ 
 ];
 
 @NgModule({
