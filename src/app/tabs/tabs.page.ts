@@ -3,17 +3,20 @@ import { IonTabs } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
-  templateUrl: './tabs.page.html',
-  styleUrls: ['./tabs.page.scss'],
+  templateUrl: 'tabs.page.html',
+  styleUrls: ['tabs.page.scss'],
 })
 export class TabsPage implements OnInit {
 
-  // @ViewChild('tabs', {static:true}) tabs: IonTabs //static false adding according to angular8
+  @ViewChild('tabs', {static: true, read: IonTabs}) private tabsRef: IonTabs //static true adding according to angular
 
   constructor() { }
 
   ngOnInit() {
-    // this.tabs.select('feed')
+    //todo fix below line so that it works
+    // this.tabsRef.select('tabs/feed');
   }
+
+  
 
 }
