@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http } from '@angular/http'
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserService } from '../user.service';
@@ -14,6 +14,8 @@ export class UploaderPage implements OnInit {
   imageURL: string
   desc: string
 
+  @ViewChild('filebutton', {static:false}) filebutton
+
   constructor(
     public http: Http,
     public afstore: AngularFirestore,
@@ -27,12 +29,25 @@ export class UploaderPage implements OnInit {
     const image = this.imageURL
     const desc = this.desc
     
-    this.afstore.doc(`users/${this.user.getUID()}`).update({ //change update-> set for first time
+    // try {
+      this.afstore.doc(`users/${this.user.getUID()}`).update({ //change update-> set for first time
       posts: firestore.FieldValue.arrayUnion({
         image, 
         desc
       })
     })
+  // }catch(err){
+  //     this.afstore.doc(`users/${this.user.getUID()}`).set({ //change update-> set for first time
+  //       posts: firestore.FieldValue.arrayUnion({
+  //         image, 
+  //         desc
+  //       })
+  //     })
+  //   }
+  }
+
+  uploadFile(){
+    this.filebutton.nativeElement.click()
   }
 
   fileChanged(event){
