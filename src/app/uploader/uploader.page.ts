@@ -29,21 +29,12 @@ export class UploaderPage implements OnInit {
     const image = this.imageURL
     const desc = this.desc
     
-    // try {
-      this.afstore.doc(`users/${this.user.getUID()}`).update({ //change update-> set for first time
-      posts: firestore.FieldValue.arrayUnion({
-        image, 
-        desc
+    this.afstore.doc(`users/${this.user.getUID()}`).set({
+      posts:  firestore.FieldValue.arrayUnion({
+           image,
+           desc
       })
-    })
-  // }catch(err){
-  //     this.afstore.doc(`users/${this.user.getUID()}`).set({ //change update-> set for first time
-  //       posts: firestore.FieldValue.arrayUnion({
-  //         image, 
-  //         desc
-  //       })
-  //     })
-  //   }
+ }, { merge: true });
   }
 
   uploadFile(){
