@@ -17,6 +17,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { HttpModule } from '@angular/http'
 import { UserService } from './user.service'
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { ShareModule } from './share.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    HttpModule
+    HttpModule,
+    ShareModule
   ],
   providers: [
     StatusBar,
