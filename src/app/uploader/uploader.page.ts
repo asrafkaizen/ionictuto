@@ -35,10 +35,11 @@ export class UploaderPage implements OnInit {
 
     const image = this.imageURL
     const desc = this.desc
+    const author = this.user.getUsername();
     
     this.afstore.doc(`users/${this.user.getUID()}`).set({
       posts:  firestore.FieldValue.arrayUnion({
-           author: this.user.getUsername,
+           author,
            image,
            desc
       })
