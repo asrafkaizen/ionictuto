@@ -18,6 +18,7 @@ import { HttpModule } from '@angular/http'
 import { UserService } from './user.service'
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ShareModule } from './share.module';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,7 +39,8 @@ import { ShareModule } from './share.module';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    UserService
+    UserService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

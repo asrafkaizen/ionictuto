@@ -18,7 +18,18 @@
   <ion-card *ngIf="imageURL">
       <img src="https://ucarecdn.com/{{ imageURL }}/" />
       <ion-card-content>
+        <ion-item>
+          <ion-label>Issue type</ion-label>
+          <ion-select placeholder="Select One" [(ngModel)]="type">
+            <ion-select-option value="e">Electrical</ion-select-option>
+            <ion-select-option value="r">Roadwork</ion-select-option>
+            <ion-select-option value="p">Piping</ion-select-option>
+            <ion-select-option value="l">Landscape</ion-select-option>
+            <ion-select-option value="b">Building</ion-select-option>
+          </ion-select>
+        </ion-item>
         <ion-textarea placeholder="Enter description" [(ngModel)]="desc"></ion-textarea>
+        <ion-textarea placeholder="location" [(ngModel)]="loc"></ion-textarea>
         <ion-button shape="round" color="primary" (click)="createPost()">POST</ion-button>
       </ion-card-content>
 

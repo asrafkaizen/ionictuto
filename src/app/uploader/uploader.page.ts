@@ -15,6 +15,8 @@ export class UploaderPage implements OnInit {
 
   imageURL: string
   desc: string
+  type: string
+  loc: string
   busy: boolean = false
 
   @ViewChild('filebutton', {static:false}) filebutton
@@ -34,14 +36,25 @@ export class UploaderPage implements OnInit {
     this.busy = true
 
     const image = this.imageURL
+    const type = this.type
     const desc = this.desc
+    const loc = this.loc
     const author = this.user.getUsername();
     
     this.afstore.doc(`users/${this.user.getUID()}`).set({
       posts:  firestore.FieldValue.arrayUnion({
+          //  author,
+           image
+          //  desc
+      })
+    }, { merge: true });
+
+    this.afstore.doc(`posts/${image}`).set({
+      posts:  firestore.FieldValue.arrayUnion({
            author,
-           image,
-           desc
+           type,
+           desc,
+          loc
       })
     }, { merge: true });
 

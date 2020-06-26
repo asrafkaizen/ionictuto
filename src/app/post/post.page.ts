@@ -18,7 +18,7 @@ export class PostPage implements OnInit {
 
   ngOnInit() {
     this.postID = this.route.snapshot.paramMap.get('id')
-    this.post = this.afs.doc('users/${this.postID}').valueChanges()
+    this.post = this.afs.doc(`posts/${this.postID}`).valueChanges()
   }
 
 }
