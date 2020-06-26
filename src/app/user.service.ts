@@ -37,7 +37,7 @@ export class UserService {
     }
 
     getUID(): string{
-        return this.afAuth.auth.currentUser.uid
+        return this.user.uid
     }
 
     getUsername(): string {

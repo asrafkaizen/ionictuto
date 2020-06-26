@@ -58,7 +58,6 @@ export class UploaderPage implements OnInit {
       })
     }, { merge: true });
 
-    
 
     this.busy = false
     this.imageURL = ""
@@ -72,7 +71,7 @@ export class UploaderPage implements OnInit {
 
     await alert.present()
 
-    this.router.navigate(['/tabs/feed'])
+    this.router.navigate(['/tabs/profile'])
   }
 
   uploadFile(){
