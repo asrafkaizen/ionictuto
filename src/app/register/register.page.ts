@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
 import { auth } from 'firebase/app'
 import { Router } from '@angular/router'
-
 import {AlertController} from '@ionic/angular'
 import { AngularFirestore } from '@angular/fire/firestore'
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -15,6 +14,7 @@ import { UserService } from '../user.service';
 })
 export class RegisterPage implements OnInit {
 
+  name: string = ""
   username: string = ""
   password: string = ""
   password2: string = ""

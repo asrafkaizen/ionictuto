@@ -30,6 +30,22 @@
         </ion-item>
         <ion-textarea placeholder="Enter description" [(ngModel)]="desc"></ion-textarea>
         <ion-textarea placeholder="location" [(ngModel)]="loc"></ion-textarea>
+
+        <ion-button (click)="getLoc()" expand="block">Get Location</ion-button>
+        <ion-textarea placeholder="latitude" [(ngModel)]="latitude">{{lat}}</ion-textarea>
+        <ion-textarea placeholder="longitude" [(ngModel)]="longitude">{{lng}}</ion-textarea>
+        <!-- <ion-item *ngIf="locationTraces">
+          <ion-label class="ion-text-wrap">
+            <ion-label>Time: {{location.timestamp | date:'M/d/yy, h:mm a'}}</ion-label>
+            <ion-label>Latitude: {{location.latitude}} Longitude: {{location.longitude}}</ion-label>
+            <ion-label>Accuracy: {{location.accuracy}}</ion-label>
+          </ion-label>
+        </ion-item>
+
+        <ng-container *ngIf="!locationWatchStarted;">
+          <ion-button color="primary" (click)="getCoordinates()">Get Location</ion-button>
+        </ng-container> -->
+
         <ion-button shape="round" color="primary" (click)="createPost()">POST</ion-button>
       </ion-card-content>
 

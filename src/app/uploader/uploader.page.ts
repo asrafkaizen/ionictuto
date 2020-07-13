@@ -5,6 +5,7 @@ import { UserService } from '../user.service';
 import { firestore } from 'firebase';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import {Geolocation} from '@ionic-native/geolocation/ngx'
 
 @Component({
   selector: 'app-uploader',
@@ -13,11 +14,17 @@ import { Router } from '@angular/router';
 })
 export class UploaderPage implements OnInit {
 
+  lat:any=''
+  lng:any=''
   imageURL: string
   desc: string
   type: string
   loc: string
   busy: boolean = false
+
+  // locationWatchStarted:boolean;
+  // locationSubscription:any;
+  // locationTraces = [];
 
   @ViewChild('filebutton', {static:false}) filebutton
 
@@ -26,7 +33,8 @@ export class UploaderPage implements OnInit {
     public afstore: AngularFirestore,
     public user: UserService,
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private geolocation: Geolocation
     ) { }
 
   ngOnInit() {
@@ -43,9 +51,7 @@ export class UploaderPage implements OnInit {
     
     this.afstore.doc(`users/${this.user.getUID()}`).set({
       posts:  firestore.FieldValue.arrayUnion({
-          //  author,
            image
-          //  desc
       })
     }, { merge: true });
 
@@ -73,6 +79,53 @@ export class UploaderPage implements OnInit {
 
     this.router.navigate(['/tabs/profile'])
   }
+
+  getLoc(){
+  this.geolocation.getCurrentPosition(
+    {maximumAge: 1000, timeout: 5000,
+     enableHighAccuracy: true }
+    ).then((resp) => {
+          // resp.coords.latitude
+          // resp.coords.longitude
+          //alert("r succ"+resp.coords.latitude)
+          alert(JSON.stringify( resp.coords));
+    
+          this.lat=resp.coords.latitude
+          this.lng=resp.coords.longitude
+          },er=>{
+            //alert("error getting location")
+            alert('Can not retrieve Location')
+          }).catch((error) => {
+          //alert('Error getting location'+JSON.stringify(error));
+          alert('Error getting location - '+JSON.stringify(error))
+          });
+        }
+
+  // getCoordinates(){
+  //   this.geolocation.getCurrentPosition().then((resp) => {
+  //     this.locationTraces.push({
+  //       latitude:resp.coords.latitude,
+  //       longitude:resp.coords.latitude,
+  //       accuracy:resp.coords.accuracy,
+  //       timestamp:resp.timestamp
+  //     });
+
+  //   }).catch((error) => {
+  //     console.log('Error getting location', error);
+  //   });
+
+  //   this.locationSubscription = this.geolocation.watchPosition();
+  //   this.locationSubscription.subscribe((resp) => {
+
+  //     this.locationWatchStarted = true;
+  //     this.locationTraces.push({
+  //       latitude:resp.coords.latitude,
+  //       longitude:resp.coords.latitude,
+  //       accuracy:resp.coords.accuracy,
+  //       timestamp:resp.timestamp
+  //     });
+  //   });
+  // }
 
   uploadFile(){
     this.filebutton.nativeElement.click()

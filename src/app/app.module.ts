@@ -20,6 +20,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ShareModule } from './share.module';
 import { AuthService } from './auth.service';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -38,6 +40,7 @@ import { AuthService } from './auth.service';
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     UserService,
     AuthService
