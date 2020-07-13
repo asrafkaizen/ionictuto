@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Upload Image</ion-title>
+    <ion-title>Report Issue</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +13,7 @@
 
   <input type="file" *ngIf="!imageURL" (change)="fileChanged($event)" class="filebtn" #filebutton/>
   
-  <ion-button shape="round" color="primary" (click)="uploadFile()" *ngIf="!imageURL" fill="outline">Upload</ion-button>
+  <ion-button shape="round" color="primary" (click)="uploadFile()" *ngIf="!imageURL" fill="outline">Report Issue</ion-button>
 
   <ion-card *ngIf="imageURL">
       <img src="https://ucarecdn.com/{{ imageURL }}/" />
@@ -29,11 +29,10 @@
           </ion-select>
         </ion-item>
         <ion-textarea placeholder="Enter description" [(ngModel)]="desc"></ion-textarea>
-        <ion-textarea placeholder="location" [(ngModel)]="loc"></ion-textarea>
 
         <ion-button (click)="getLoc()" expand="block">Get Location</ion-button>
-        <ion-textarea placeholder="latitude" [(ngModel)]="latitude">{{lat}}</ion-textarea>
-        <ion-textarea placeholder="longitude" [(ngModel)]="longitude">{{lng}}</ion-textarea>
+        <ion-textarea placeholder="latitude" value="{{lat}}" [(ngModel)]="latitude"></ion-textarea>
+        <ion-textarea placeholder="longitude" value= "{{lng}}" [(ngModel)]="longitude"></ion-textarea>
         <!-- <ion-item *ngIf="locationTraces">
           <ion-label class="ion-text-wrap">
             <ion-label>Time: {{location.timestamp | date:'M/d/yy, h:mm a'}}</ion-label>

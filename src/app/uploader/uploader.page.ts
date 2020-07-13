@@ -16,6 +16,8 @@ export class UploaderPage implements OnInit {
 
   lat:any=''
   lng:any=''
+  latitude:any=''
+  longitude:any=''
   imageURL: string
   desc: string
   type: string
@@ -46,7 +48,8 @@ export class UploaderPage implements OnInit {
     const image = this.imageURL
     const type = this.type
     const desc = this.desc
-    const loc = this.loc
+    const latitude = this.latitude
+    const longitude = this.longitude
     const author = this.user.getUsername();
     
     this.afstore.doc(`users/${this.user.getUID()}`).set({
@@ -60,7 +63,8 @@ export class UploaderPage implements OnInit {
            author,
            type,
            desc,
-          loc
+           latitude,
+           longitude
       })
     }, { merge: true });
 
@@ -88,15 +92,13 @@ export class UploaderPage implements OnInit {
           // resp.coords.latitude
           // resp.coords.longitude
           //alert("r succ"+resp.coords.latitude)
-          alert(JSON.stringify( resp.coords));
+          //alert(JSON.stringify( resp.coords));
     
           this.lat=resp.coords.latitude
           this.lng=resp.coords.longitude
           },er=>{
-            //alert("error getting location")
             alert('Can not retrieve Location')
           }).catch((error) => {
-          //alert('Error getting location'+JSON.stringify(error));
           alert('Error getting location - '+JSON.stringify(error))
           });
         }
