@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PostService, Post } from 'src/app/services/post.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
@@ -10,16 +11,39 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class PostPage implements OnInit {
 
 	postID: string
-  	post
+	desc:string
+
+  	post: Post = {
+		latitude:'',
+		longitude:'',
+		desc:'',
+		type:''
+	  }
   
-	constructor(private route: ActivatedRoute, private afs: AngularFirestore) {
+	constructor(private route: ActivatedRoute, private postService: PostService) {
 		
 
 	}
 
 	ngOnInit() {
 		this.postID = this.route.snapshot.paramMap.get('id')
-		this.post = this.afs.doc(`posts/${this.postID}`).valueChanges()
+		if (this.postID) {
+			this.postService.getPost(this.postID).subscribe(post => {
+			  this.post = post;
+			  this.desc = post.desc;
+			});
+		  }
+		// this.post = this.afs.doc(`posts/${this.postID}`).valueChanges()
 	}
+
+	ionViewWillEnter() {
+		this.postID = this.route.snapshot.paramMap.get('id')
+		if (this.postID) {
+			this.postService.getPost(this.postID).subscribe(post => {
+			  this.post = post;
+			  this.desc = post.desc;
+			});
+		  }
+	  }
 
 }
